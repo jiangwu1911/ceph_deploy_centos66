@@ -159,6 +159,17 @@ function import_centos66() {
     cobbler sync
 }
 
+function config_yum_repo() {
+    rm -rf /etc/yum.repos.d/*
+    cat >/etc/yum.repos.d/admin.repo <<EOF
+[ceph]
+name=admin
+baseurl=http://localhost/cobbler/ks_mirror/ceph/
+gpgcheck=0
+enabled=1
+EOF
+}
+
 function install_ntp_server() {
     sed -i "s#^server.*##" /etc/ntp.conf
     echo "server 127.127.1.0" >> /etc/ntp.conf
@@ -209,6 +220,7 @@ start_cobbler
 generate_sshkey
 import_centos66
 
+config_yum_repo
 install_ntp_server
 install_ceph_deploy
 config_mysql

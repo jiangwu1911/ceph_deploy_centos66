@@ -40,7 +40,7 @@ rm -f /etc/yum.repos.d/*
 cat > /etc/yum.repos.d/centos.repo <<EOF
 [ceph]
 name=ceph
-baseurl=http://10.20.0.3/cobbler/ks_mirror/ceph/x86_64/6/
+baseurl=http://10.20.0.3/cobbler/ks_mirror/ceph/
 gpgcheck=0
 enabled=1
 EOF
