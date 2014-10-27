@@ -144,6 +144,8 @@ function import_centos66() {
 
     cp $sourcedir/cobbler/centos66/centos66.ks /var/lib/cobbler/kickstarts/
     mkdir -p /var/www/cobbler/ks_mirror/ceph
+    cp -r $sourcedir/base /var/www/cobbler/ks_mirror/ceph
+    cp -r $sourcedir/epel /var/www/cobbler/ks_mirror/ceph
     cp -r $sourcedir/ceph /var/www/cobbler/ks_mirror/ceph
     cp -r $sourcedir/ceph-noarch /var/www/cobbler/ks_mirror/ceph
     cp -r $sourcedir/elrepo-kernel /var/www/cobbler/ks_mirror/ceph
