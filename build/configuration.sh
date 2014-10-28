@@ -147,8 +147,7 @@ function import_centos66() {
     cp -r $sourcedir/base /var/www/cobbler/ks_mirror/ceph
     cp -r $sourcedir/epel /var/www/cobbler/ks_mirror/ceph
     cp -r $sourcedir/ceph /var/www/cobbler/ks_mirror/ceph
-    cp -r $sourcedir/ceph-noarch /var/www/cobbler/ks_mirror/ceph
-    cp -r $sourcedir/elrepo-kernel /var/www/cobbler/ks_mirror/ceph
+    cp -r $sourcedir/kernel_ml /var/www/cobbler/ks_mirror/ceph
     createrepo /var/www/cobbler/ks_mirror/ceph
     umount /root/centos66
     rm -rf /root/centos66
