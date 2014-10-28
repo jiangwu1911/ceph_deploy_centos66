@@ -65,7 +65,7 @@ sed -i "s/^hosts:.*/hosts: files/" /etc/nsswitch.conf
 # Upgrade kernel
 yum install -y kernel-ml
 sed -i "s/^default=1/default=0/" /boot/grub/grub.conf
-yum install btrfs-progs
+yum install -y btrfs-progs
 
 # Config yum
 yum install -y ntpdate
