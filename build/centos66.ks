@@ -67,10 +67,13 @@ yum install -y kernel-ml
 sed -i "s/^default=1/default=0/" /boot/grub/grub.conf
 yum install -y btrfs-progs
 
-# Config yum
+# Install ntpdate
 yum install -y ntpdate
 echo "00 */1 * * * /usr/sbin/ntpdate 10.20.0.3 >/dev/null 2>&1; /sbin/hwclock -w >/dev/null 2>&1 " > /tmp/cron.ntp
 crontab /tmp/cron.ntp
+
+# Install parted
+yum install -y parted
 
 cat >> /etc/sysctl.conf <<EOF
 
