@@ -137,12 +137,11 @@ function start_cobbler() {
     chkconfig httpd on
 }
 
-function import_centos66() {
+function import_os_image() {
     mkdir /root/centos66
     mount -o loop $sourcedir/cobbler/centos66/CentOS-6.6-x86_64-minimal.iso /root/centos66
     cobbler import --path=/root/centos66/ --name=centos66 --arch=x86_64
 
-    cp $sourcedir/cobbler/centos66/centos66.ks /var/lib/cobbler/kickstarts/
     mkdir -p /var/www/cobbler/ks_mirror/ceph
     cp -r $sourcedir/base /var/www/cobbler/ks_mirror/ceph
     cp -r $sourcedir/epel /var/www/cobbler/ks_mirror/ceph
@@ -152,10 +151,11 @@ function import_centos66() {
     umount /root/centos66
     rm -rf /root/centos66
 
+    cp $sourcedir/cobbler/centos66/storage_node.ks /var/lib/cobbler/kickstarts/
     sshkey=`cat /root/.ssh/id_rsa.pub`
-    sed -i "s#ssh-rsa.*#$sshkey#" /var/lib/cobbler/kickstarts/centos66.ks
-    sed -i "s#10\.20\.0\.3#$IPADDR#" /var/lib/cobbler/kickstarts/centos66.ks
-    cobbler profile edit --name=centos66-x86_64 --distro=centos66-x86_64 --kickstart=/var/lib/cobbler/kickstarts/centos66.ks
+    sed -i "s#ssh-rsa.*#$sshkey#" /var/lib/cobbler/kickstarts/storage_node.ks
+    sed -i "s#10\.20\.0\.3#$IPADDR#" /var/lib/cobbler/kickstarts/storage_node.ks
+    cobbler profile edit --name=storage_node --distro=centos66-x86_64 --kickstart=/var/lib/cobbler/kickstarts/storage_node.ks
 
     cobbler sync
 }
@@ -219,7 +219,7 @@ config_cobbler
 start_cobbler
 
 generate_sshkey
-import_centos66
+import_os_image
 
 config_yum_repo
 install_ntp_server
