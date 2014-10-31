@@ -59,6 +59,9 @@ StrictHostKeyChecking no
 UserKnownHostsFile /dev/null
 EOF
 
+# Config sshd
+sed -i "s/PasswordAuthentication yes/PasswordAuthentication no/" /etc/ssh/sshd_config
+
 # Config network
 sed -i "s/^hosts:.*/hosts: files/" /etc/nsswitch.conf
 

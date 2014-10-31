@@ -155,7 +155,8 @@ function import_os_image() {
     sshkey=`cat /root/.ssh/id_rsa.pub`
     sed -i "s#ssh-rsa.*#$sshkey#" /var/lib/cobbler/kickstarts/storage_node.ks
     sed -i "s#10\.20\.0\.3#$IPADDR#" /var/lib/cobbler/kickstarts/storage_node.ks
-    cobbler profile edit --name=storage_node --distro=centos66-x86_64 --kickstart=/var/lib/cobbler/kickstarts/storage_node.ks
+    cobbler profile remove --name=centos66-x86_64
+    cobbler profile add --name=storage_node --distro=centos66-x86_64 --kickstart=/var/lib/cobbler/kickstarts/storage_node.ks
 
     cobbler sync
 }
